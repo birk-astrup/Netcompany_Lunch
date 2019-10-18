@@ -12,8 +12,8 @@ export default ({user, setIsOpen}) => {
   return (
     <div>
       <div className="dialog">
-        <h1 className="big-title big-title--black">{user.nickname}</h1>
-        <h3 className="primary-subtitle">{user.email}</h3>
+        <h1 className="big-title">{user.nickname}</h1>
+        <h3 className="primary-subtitle u-mb-medium">{user.email}</h3>
 
         <div className="dialog-registered">
         {console.log(user)}
