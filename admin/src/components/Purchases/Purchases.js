@@ -12,8 +12,8 @@ export default ({info, openUserDialog}) => (
       <h1>Ingen lunsj registrert</h1>
       : (info.users.map(user => (
         <div key={user.id} className="purchases-table-box" onClick={() => openUserDialog(user)}>
-          <p className="primary-subtitle">{user.nickname}</p>
-          <p className="primary-subtitle">{user.email}</p>
+          <p className="primary-subtitle primary-subtitle--white">{user.nickname}</p>
+          <p className="primary-subtitle primary-subtitle--white">{user.email}</p>
           <p className="primary-subtitle primary-subtitle--bold">{user.registered.length}</p>
         </div>)
       ))}
