@@ -1,9 +1,10 @@
 import React, {memo} from 'react';
 
+import {PERIOD, CURRENCY, INCOME_THIS_MONTH, USERS_THIS_MONTH} from '../../constants/constants';
+import ExcelExport from '../ExcelExport/ExcelExport';
 import './Period.scss'
-import {PERIOD, CURRENCY, INCOME_THIS_MONTH, USERS_THIS_MONTH, EXPORT} from '../../constants/constants';
 
-export default memo(({amountOfUsers = 0, amountOfPayments = 0, period}) => {
+export default memo(({amountOfUsers = 0, amountOfPayments = 0, period, data}) => {
   return (
     <>
       <div className="period-headline">
@@ -11,8 +12,7 @@ export default memo(({amountOfUsers = 0, amountOfPayments = 0, period}) => {
           <h2 className="primary-title">{PERIOD}</h2>
           <h3 className="primary-subtitle">{period}</h3>
         </div>
-
-        <button className="period-headline-button">{EXPORT}</button>
+        <ExcelExport data={data}/>
       </div>
       
       {/* Statistics */}

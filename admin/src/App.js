@@ -45,7 +45,7 @@ function App() {
       <Container>
         {information.users && 
         <>
-          <Period amountOfPayments={information.payments} amountOfUsers={information.users.length} period={period}/>
+          <Period amountOfPayments={information.payments} amountOfUsers={information.users.length} period={period} data={information.users} />
           <MonthPicker monthPicked={m => setMonth(m)} />
           <Purchases openUserDialog={openUserDialog} info={information}/> 
         </>
