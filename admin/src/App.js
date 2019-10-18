@@ -9,13 +9,14 @@ import Purchases from './components/Purchases/Purchases';
 import MonthPicker from './components/MonthPicker/MonthPicker';
 
 import GET_USERS from './queries/getUsers';
-import {calculateResultForMonth} from './utils/calculations';
+import {calculateResultForMonth, calculatePeriodForMonth} from './utils/calculations';
 
 import './style/main.scss';
 
 function App() {
   const [userData, setUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [period, setPeriod] = useState('');
   const [month, setMonth] = useState('January');
   const [information, setInformation] = useState([])
   const [getUsers, {data, loading, called}] = useLazyQuery(GET_USERS)
@@ -33,7 +34,9 @@ function App() {
   // Sorting users when data is recieved
   useEffect(() => {
     const sortedUsersByMonth = !loading && called && data && calculateResultForMonth(data, month);
+    const timePeriodByMonth = !loading && called && calculatePeriodForMonth(month)
     setInformation(sortedUsersByMonth);
+    setPeriod(timePeriodByMonth);
   }, [called, data, loading, month]);
 
   return (
@@ -42,7 +45,7 @@ function App() {
       <Container>
         {information.users && 
         <>
-          <Period amountOfPayments={information.payments} amountOfUsers={information.users.length}/>
+          <Period amountOfPayments={information.payments} amountOfUsers={information.users.length} period={period}/>
           <MonthPicker monthPicked={m => setMonth(m)} />
           <Purchases openUserDialog={openUserDialog} info={information}/> 
         </>
