@@ -10,10 +10,13 @@ import MonthPicker from './components/MonthPicker/MonthPicker';
 
 import GET_USERS from './queries/getUsers';
 import {calculateResultForMonth, calculatePeriodForMonth} from './utils/calculations';
+import {useAuth0} from './utils/react-auth0-spa.js';
 
 import './style/main.scss';
 
 function App() {
+  const auth = useAuth0();
+
   const [userData, setUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [period, setPeriod] = useState('');
@@ -31,6 +34,12 @@ function App() {
     !loading && !called && getUsers()
   }, [called, getUsers, loading]);
 
+  useEffect(() => {
+    if (auth.loading || auth.isAuthenticated) return;
+    const fn = async () => await auth.loginWithRedirect({appState: {targetUrl: '/'}});
+    fn();
+  }, [loading, auth]);
+
   // Sorting users when data is recieved
   useEffect(() => {
     const sortedUsersByMonth = !loading && called && data && calculateResultForMonth(data, month);
@@ -39,11 +48,18 @@ function App() {
     setPeriod(timePeriodByMonth);
   }, [called, data, loading, month]);
 
-  return (
+
+  if (auth.loading) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+
+  return auth.loading && auth.isAuthenticated ? <div>Loading ............ </div> : (
     <div className="App">
       <Header/>
       <Container>
-        {information.users && 
+        {information.users && information.users.length > 0 && 
         <>
           <Period amountOfPayments={information.payments} amountOfUsers={information.users.length} period={period} data={information.users} />
           <MonthPicker monthPicked={m => setMonth(m)} />
