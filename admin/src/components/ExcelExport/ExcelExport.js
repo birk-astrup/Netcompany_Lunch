@@ -6,6 +6,7 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
+// Reformats user array to fit excel format
 export default ({data}) => {
   const arr = []
   for (let {nickname, id, email, registered} of data) {

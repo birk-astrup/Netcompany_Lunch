@@ -1,8 +1,9 @@
-import React, {memo} from 'react';
+import React, {memo, lazy, Suspense} from 'react';
 
 import {PERIOD, CURRENCY, INCOME_THIS_MONTH, USERS_THIS_MONTH} from '../../constants/constants';
-import ExcelExport from '../ExcelExport/ExcelExport';
 import './Period.scss'
+
+const ExcelExport = lazy(() => import('../ExcelExport/ExcelExport'));
 
 export default memo(({amountOfUsers = 0, amountOfPayments = 0, period, data}) => {
   return (
@@ -12,7 +13,9 @@ export default memo(({amountOfUsers = 0, amountOfPayments = 0, period, data}) =>
           <h2 className="primary-title">{PERIOD}</h2>
           <h3 className="primary-subtitle">{period}</h3>
         </div>
-        <ExcelExport data={data}/>
+        <Suspense fallback={<p>Loading Excel button</p>}>
+          <ExcelExport data={data}/>
+        </Suspense>
       </div>
       
       {/* Statistics */}
