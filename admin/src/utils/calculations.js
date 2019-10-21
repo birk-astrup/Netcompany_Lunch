@@ -1,5 +1,6 @@
 import {MONTH_NAMES} from '../constants/constants';
 
+// Returns array with users sorted on chosen month
 export const calculateResultForMonth = (arr, month) => {
   const userArray = [];
   let payments = 0;
@@ -28,14 +29,14 @@ export const calculateResultForMonth = (arr, month) => {
     }
   }
 
-  console.log(userArray);
-
   return {
     payments,
     users: userArray
   };
 }
 
+
+// Returns a string with the period chosen e.g. 1.10.2019 - 31.10.2019
 export const calculatePeriodForMonth = (month) => {
   for (let m in MONTH_NAMES) {
     if (MONTH_NAMES[m] === month) {

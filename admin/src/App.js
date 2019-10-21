@@ -21,7 +21,9 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [period, setPeriod] = useState('');
   const [month, setMonth] = useState('January');
-  const [information, setInformation] = useState([])
+  const [information, setInformation] = useState()
+
+  // getUsers query
   const [getUsers, {data, loading, called}] = useLazyQuery(GET_USERS)
 
   const openUserDialog = (user) => {
@@ -34,6 +36,7 @@ function App() {
     !loading && !called && getUsers()
   }, [called, getUsers, loading]);
 
+  // Opens login popup for user when not authenticated
   useEffect(() => {
     if (auth.loading || auth.isAuthenticated) return;
     const fn = async () => await auth.loginWithRedirect({appState: {targetUrl: '/'}});
@@ -42,31 +45,32 @@ function App() {
 
   // Sorting users when data is recieved
   useEffect(() => {
-    const sortedUsersByMonth = !loading && called && data && calculateResultForMonth(data, month);
-    const timePeriodByMonth = !loading && called && calculatePeriodForMonth(month)
-    setInformation(sortedUsersByMonth);
-    setPeriod(timePeriodByMonth);
+    if (!loading && called && data) {
+      let sortedUserByMonth = calculateResultForMonth(data, month);
+      setInformation(sortedUserByMonth);
+    }
+
+    if (!loading && called) {
+      const timePeriodByMonth = calculatePeriodForMonth(month)
+      setPeriod(timePeriodByMonth);
+    }
   }, [called, data, loading, month]);
 
 
-  if (auth.loading) {
-    return (
-      <div>Loading...</div>
-    )
-  }
+  // TODO add in loading animation
+  if (auth.loading) return <div>Loading...</div>
 
-  return auth.loading && auth.isAuthenticated ? <div>Loading ............ </div> : (
+  // Returns interface if users exists
+  return (
     <div className="App">
       <Header/>
-      <Container>
-        {information.users && information.users.length > 0 && 
-        <>
+      {information.users && information.users.length > 0 && 
+        <Container>
           <Period amountOfPayments={information.payments} amountOfUsers={information.users.length} period={period} data={information.users} />
           <MonthPicker monthPicked={m => setMonth(m)} />
           <Purchases openUserDialog={openUserDialog} info={information}/> 
-        </>
+        </Container>
       }
-      </Container>
 
       {isOpen && <Dialog setIsOpen={setIsOpen} user={userData}/>}
     </div>

@@ -17,7 +17,7 @@ export default ({monthPicked}) => {
   }
 
   useEffect(() => {
-    // Send it up
+    // Send it up via props
     monthPicked(month)
   }, [month, monthPicked])
 
