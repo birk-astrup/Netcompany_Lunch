@@ -28,6 +28,8 @@ export const calculateResultForMonth = (arr, month) => {
     }
   }
 
+  console.log(userArray);
+
   return {
     payments,
     users: userArray
