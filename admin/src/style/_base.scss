@@ -15,12 +15,16 @@ html {
     box-sizing: border-box;
     font-size: 62.5%;
 
-    @include query-for(mobile) {
-        font-size: 35%;
+    @include query-for(landscape) {
+        font-size: 56.25%;
+    }
+
+    @include query-for(tablet) {
+        font-size: 50%;
     }
 
     @include query-for(desktop) {
-        font-size: 50%;
+        font-size: 75%;
     }
 }
 
@@ -30,4 +34,5 @@ body {
     line-height: 1.6;
     background-size: cover;
     min-height: 100vh;
+    background: #0B222E;
 }

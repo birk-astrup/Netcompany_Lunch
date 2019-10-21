@@ -1,6 +1,7 @@
 .primary {
     &-title {
         font-size: 1.5rem;
+        color: #DE9C2B;
         text-transform: uppercase;
         font-weight: bold;
     }
@@ -8,18 +9,22 @@
     &-subtitle {
         font-size: 2rem;
         font-weight: 400;
-        color: #7E7E7E;
+        color: #BABABA;
+
+        &--white {
+            color: #FFFFFF;
+        }
 
         &--bold {
             font-weight: bold;
-            color: #000000;
+            color: #FFFFFF;
         }
     }
 
     &-text {
         font-size: 2rem;
         font-weight: 400;
-        color: #000000;
+        color: #FFFFFF;
     }
 }
 
@@ -28,7 +33,7 @@
         font-size: 4rem;
         font-weight: bold;
         text-transform: uppercase;
-        color: #50B8C1;
+        color: #FFFFFF;
 
         &--black {
             color: #000000;

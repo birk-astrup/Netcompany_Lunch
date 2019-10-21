@@ -13,10 +13,11 @@ const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  uri: 'http://net-lunch.herokuapp.com/graphql',
   cache,
   request: async op => {
     const access = await SInfo.getItem('accessToken', {});
+    console.log(access);
     op.setContext(context => ({
       headers: {
         ...context.headers,

@@ -28,8 +28,22 @@ export const calculateResultForMonth = (arr, month) => {
     }
   }
 
+  console.log(userArray);
+
   return {
     payments,
     users: userArray
   };
+}
+
+export const calculatePeriodForMonth = (month) => {
+  for (let m in MONTH_NAMES) {
+    if (MONTH_NAMES[m] === month) {
+      const today = new Date()
+      const thisYear = today.getFullYear()
+      const monthLength = new Date(thisYear, m, 0).getDate()
+
+      return `1.${parseInt(m) + 1}.${thisYear} - ${monthLength}.${parseInt(m) + 1}.${thisYear}`
+    }
+  }
 }
