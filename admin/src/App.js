@@ -33,8 +33,8 @@ function App() {
 
   // Gets users on entry 
   useEffect(() => {
-    !loading && !called && getUsers()
-  }, [called, getUsers, loading]);
+    !loading && !called && auth.isAuthenticated && getUsers()
+  }, [auth.isAuthenticated, called, getUsers, loading]);
 
   // Opens login popup for user when not authenticated
   useEffect(() => {
@@ -64,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      {information.users && information.users.length > 0 && 
+      {information && information.users.length > 0 && 
         <Container>
           <Period amountOfPayments={information.payments} amountOfUsers={information.users.length} period={period} data={information.users} />
           <MonthPicker monthPicked={m => setMonth(m)} />

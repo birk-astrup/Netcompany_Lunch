@@ -25,7 +25,6 @@ export default ({children}) => {
     } catch (e) {
       console.error('ERROR FROM GETTING ACCESS TOKEN: ',e);
     }
-
   }, [getTokenSilently, isAuthenticated])
 
   // Apollo client that sends access token to backend
