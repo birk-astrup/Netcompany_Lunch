@@ -64,12 +64,15 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      {information && information.users.length > 0 && 
+      {information && information.users.length > 0 ? (
         <Container>
           <Period amountOfPayments={information.payments} amountOfUsers={information.users.length} period={period} data={information.users} />
           <MonthPicker monthPicked={m => setMonth(m)} />
           <Purchases openUserDialog={openUserDialog} info={information}/> 
         </Container>
+      ) : (
+        <div className="big-title">No entries</div>
+      )
       }
 
       {isOpen && <Dialog setIsOpen={setIsOpen} user={userData}/>}
