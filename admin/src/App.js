@@ -71,7 +71,7 @@ function App() {
           <Purchases openUserDialog={openUserDialog} info={information}/> 
         </Container>
       ) : (
-        <div className="big-title">No entries</div>
+        <div className="primary-subtitle">No entries</div>
       )
       }
 
