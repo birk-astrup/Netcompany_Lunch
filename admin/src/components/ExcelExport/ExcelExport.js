@@ -23,7 +23,7 @@ export default ({data}) => {
   }
 
   return arr.length > 0 && (
-    <ExcelFile element={<div className="period-headline-button">{EXPORT}</div>}>
+    <ExcelFile element={<div className="period-headline-button">{EXPORT} yoo!</div>}>
         <ExcelSheet data={arr} name="Timestamps">
           <ExcelColumn label="Nickname" value="nickname"/>
           <ExcelColumn label="Auth0 Id" value="id"/>
